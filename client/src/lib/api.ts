@@ -9,6 +9,7 @@ import {
   ChangeWorkspaceMemberRoleType,
   CreateProjectPayloadType,
   CreateTaskPayloadType,
+  EditTaskPayloadType,
   CreateWorkspaceResponseType,
   EditProjectPayloadType,
   ProjectByIdPayloadType,
@@ -199,6 +200,20 @@ export const createTaskMutationFn = async ({
 }: CreateTaskPayloadType) => {
   const response = await API.post(
     `/task/project/${projectId}/workspace/${workspaceId}/create`,
+    data
+  );
+  return response.data;
+};
+
+
+export const editTaskMutationFn = async ({
+  taskId,
+  projectId,
+  workspaceId,
+  data,
+}: EditTaskPayloadType): Promise<{message: string;}> => {
+  const response = await API.put(
+    `/task/${taskId}/project/${projectId}/workspace/${workspaceId}/update/`,
     data
   );
   return response.data;

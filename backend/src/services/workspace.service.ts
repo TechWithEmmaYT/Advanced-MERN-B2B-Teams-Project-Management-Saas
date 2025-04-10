@@ -212,7 +212,7 @@ export const deleteWorkspaceService = async (
     }
 
     // Check if the user owns the workspace
-    if (workspace.owner.toString() !== userId) {
+    if (!workspace.owner.equals(new mongoose.Types.ObjectId(userId))) { 
       throw new BadRequestException(
         "You are not authorized to delete this workspace"
       );
